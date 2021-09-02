@@ -1,0 +1,46 @@
+﻿CHÈN PHẦN TỬ VÀO VECTOR VỚI INSERT
+vector<int> myvector(4, 10);
+myvector.insert(myvector.begin(), 5, 1); // 1 1 1 1 1 10 10 10 10
+
+vector<int> myvector (4, 100);
+vector<int> l;
+l.push_back(1);
+l.push_back(2);
+l.push_back(3);
+
+myvector.insert(myvector.begin(), l.begin(), l.end());
+// 1 2 3 100 100 100 100
+
+vector<int> vector2(4, 10);
+vector2.push_back(5);
+vector2.insert(vector2.begin(), 9);
+// 9 10 10 10 10 5
+----------------------------------------------------------------------------------
+Truy xuất ngẫu nhiên với at() hay toán tử []
+Ngoài ra vector còn có hàm thành viên cho phép truy xuất trực tiếp đến giá trị của các phần tử trong nó,
+đây là điều làm cho việc sử dụng vector tiện lợi hơn so với list, toán tử [] hay hàm thành viên at() 
+cho phép truy xuất giá trị tại một vị trí trong mảng.
+
+
+vector<double> first(4, 50); // first = { 50, 50, 50, 50}
+
+first.push_back (3.1);
+first.push_back (2.2);
+first.push_back (2.9);
+// first = { 50, 50, 50, 50, 3.1, 2.2, 2.9}
+
+cout << first.at(5) << endl << first[6]; // output: 2.2 and 2.9
+
+Trong ví dụ trên với các hàm push_back() có chức năng là thêm vào một giá  trị cho vector,
+pop_back() chức năng xóa phần tử cuối cùng của vector mà không cần quan tâm đến kích thước như mảng, 
+tương tự ta có push_front() và pop_front() thêm và xóa phần tử đầu.
+----------------------------------------------------------------------------------
+Với hàm thành viên swap() cho phép hoán đổi nội dung giữa 2 vector:
+
+vector<int> foo (3,100);   // three ints with a value of 100
+vector<int> bar (5,200);   // five ints with a value of 200
+
+foo.swap(bar);
+// foo: 200 200 200 200 200
+// bar: 100 100 100
+----------------------------------------------------------------------------------

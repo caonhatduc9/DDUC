@@ -1,0 +1,5 @@
+ABC|Nguyen Van A|Da Nang|6:00
+XYZ|Tran Van B|Buon Ma Thuot|6:15
+ABC|Nguyen Van C|Ha Noi|7:00
+ABC|Tran Van D|Hai Phong|8:00
+XYZ|Tran Van E|Ha Noi|8:15

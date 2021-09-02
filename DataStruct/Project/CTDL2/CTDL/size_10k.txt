@@ -1,0 +1,71 @@
+Sorting Algorithm: insertion
+Data order: RandomData
+Data size: 10000
+Time running: 82
+count compare: 24842175
+
+Sorting Algorithm: binary insertion
+Data order: RandomData
+Data size: 10000
+Time running: 106
+count compare: 25090192
+
+Sorting Algorithm: selection_sort
+Data order: RandomData
+Data size: 10000
+Time running: 120
+count compare: 50014999
+
+Sorting Algorithm: insertion
+Data order: SortedData
+Data size: 10000
+Time running: 1
+count compare: 19999
+
+Sorting Algorithm: binary insertion
+Data order: SortedData
+Data size: 10000
+Time running: 2
+count compare: 277232
+
+Sorting Algorithm: selection_sort
+Data order: SortedData
+Data size: 10000
+Time running: 183
+count compare: 50014999
+
+Sorting Algorithm: insertion
+Data order: ReverseData
+Data size: 10000
+Time running: 134
+count compare: 50014999
+
+Sorting Algorithm: binary insertion
+Data order: ReverseData
+Data size: 10000
+Time running: 145
+count compare: 50252260
+
+Sorting Algorithm: selection_sort
+Data order: ReverseData
+Data size: 10000
+Time running: 161
+count compare: 50014999
+
+Sorting Algorithm: insertion
+Data order: NearlySortedData
+Data size: 10000
+Time running: 0
+count compare: 69523
+
+Sorting Algorithm: binary insertion
+Data order: NearlySortedData
+Data size: 10000
+Time running: 1
+count compare: 323616
+
+Sorting Algorithm: selection_sort
+Data order: NearlySortedData
+Data size: 10000
+Time running: 158
+count compare: 50014999

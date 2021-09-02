@@ -1,0 +1,13 @@
+3
+1
+iPhone XS Max
+10
+40000000
+2
+Samsung Galaxy Note 9
+2
+23000000
+3
+xiaomi a2 lite
+7
+1000000
