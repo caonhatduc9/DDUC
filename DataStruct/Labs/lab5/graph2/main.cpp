@@ -1,16 +1,10 @@
-<<<<<<< HEAD
 #include<iostream>
 #include<fstream>
 #include<sstream>
 #include<vector>
 #include<string>;
-=======
-#include <iostream>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <string>;
->>>>>>> 91f5c58 (up lai)
+#include<queue>
+#include<stack>
 using namespace std;
 
 vector<vector<int>> toAdjList()
@@ -35,12 +29,8 @@ vector<vector<int>> toAdjList()
 	}
 	return adjList;
 }
-<<<<<<< HEAD
-vector<vector<int>> toAdjMatrix() {
-=======
 vector<vector<int>> toAdjMatrix()
 {
->>>>>>> 91f5c58 (up lai)
 	ifstream fi("graph2.txt");
 	string s, s1;
 	getline(fi, s);
@@ -60,7 +50,6 @@ vector<vector<int>> toAdjMatrix()
 	}
 	return adjMatrix;
 }
-
 bool isDirected1(vector<vector<int>> adjMatrix)
 {
 	for (int i = 0; i < adjMatrix.size(); i++)
@@ -73,48 +62,34 @@ bool isDirected2(vector<vector<int>> adjList)
 {
 	bool check;
 	for (int i = 0; i < adjList.size(); i++)
-<<<<<<< HEAD
 		for (int j = 0; j < adjList[i].size(); j++) {
-=======
-		for (int j = 0; j < adjList[i].size(); j++)
-		{
->>>>>>> 91f5c58 (up lai)
-			check = false;
-			for (int k = 0; k < adjList[adjList[i][j]].size(); k++)
-				if (i == adjList[adjList[i][j]][k])
-				{
-					check = true;
-					break;
-				}
-			if (check == false)
-				return 1;
+			for (int j = 0; j < adjList[i].size(); j++)
+			{
+				check = false;
+				for (int k = 0; k < adjList[adjList[i][j]].size(); k++)
+					if (i == adjList[adjList[i][j]][k])
+					{
+						check = true;
+						break;
+					}
+				if (check == false)
+					return 1;
+			}
+			return 0;
 		}
-	return 0;
 }
-
 void show(vector<vector<int>> adjList)
 {
-<<<<<<< HEAD
 	for (int i = 0; i < adjList.size(); i++) {
-=======
-	for (int i = 0; i < adjList.size(); i++)
-	{
->>>>>>> 91f5c58 (up lai)
-		for (int j = 0; j < adjList[i].size(); j++)
-			cout << adjList[i][j] << " ";
-		cout << endl;
+		for (int i = 0; i < adjList.size(); i++)
+		{
+			for (int j = 0; j < adjList[i].size(); j++)
+				cout << adjList[i][j] << " ";
+			cout << endl;
+		}
 	}
+
 }
-
-<<<<<<< HEAD
-int main() {
-		vector<vector<int>> adjList = toAdjList();
-	//vector<vector<int>> adjMatrix = toAdjMatrix();
-	cout << isDirected2(adjList);
-	//show(adjList);
-	//show(adjMatrix);
-
-=======
 int numberOfVertices(vector<vector<int>> adjList)
 {
 	return adjList.size();
@@ -139,7 +114,6 @@ int numberOfEdge2(vector<vector<int>> adjList)
 		return sum;
 	return sum / 2;
 }
-
 int outDegree1(vector<vector<int>> adjMatrix, int vertex)
 {
 	return count(adjMatrix[vertex].begin(), adjMatrix[vertex].end(), 1);
@@ -204,7 +178,6 @@ vector<int> listOfIsolated2(vector<vector<int>> adjList)
 	}
 	return isolatedVertices;
 }
-
 vector<int> listOfLeaf1(vector<vector<int>> adjMatrix)
 {
 	vector<int> leafVertices;
@@ -232,7 +205,8 @@ vector<int> listOfLeaf2(vector<vector<int>> adjList)
 }
 // doi thi hoan chinh: giua hai dinh bat ki luon co canh noi, khong noi voi chinh no, vo huong
 bool isCompletedGraph2(vector<vector<int>> adjList)
-{
+{// xet khuyen
+
 	for (int i = 0; i < adjList.size(); i++)
 		if (adjList[i].size() != adjList.size() - 1)
 			return false;
@@ -245,6 +219,124 @@ bool isCompletedGraph1(vector<vector<int>> adjMatrix)
 			return false;
 	return true;
 }
+bool isCicularGraph1(vector<vector<int>> adjMatrix)
+{
+	int vertex;
+	vector <bool> check(adjMatrix.size(), false);
+	queue <int> q;
+	q.push(0);
+	check[0] = true;
+	while (!q.empty())
+	{
+		vertex = q.front();
+		q.pop();
+		if (count(adjMatrix[vertex].begin(), adjMatrix[vertex].end(), 1) != 2)
+			return false;
+		else {
+			for (int j = 0; j < n; j++)
+			{
+				if (adjMatrix[vertex][j] == 1)
+				{
+					if (check[j] == false)
+					{
+						q.push(j);
+						check[j] = true;
+					}
+				}
+			}
+		}
+	}
+	return true;
+}
+bool isCicularGraph2(vector<vector<int>> adjList)
+{
+	int vertex;
+	vector <bool> check(adjList.size(), false);
+	queue <int> q;
+	q.push(0);
+	check[0] = true;
+	while (!q.empty())
+	{
+		vertex = q.front();
+		q.pop();
+		if (adjList[vertex].size() != 2)
+			return false;
+		else {
+			if (check[adjList[vertex][0]] == false)
+			{
+				q.push(adjList[vertex][0]);
+				adjList[vertex][0] = true;
+
+			}
+			if (check[adjList[vertex][1]] == false)
+			{
+				q.push(adjList[vertex][1]);
+				adjList[vertex][1] = true;
+
+			}
+		}
+	}
+	return true;
+}
+// do thi phan doi(Bigraph) co the chia thanh 2 tap dinh (A) va (B) sao cho cac ddinh cua
+//A khong noi duoc voi nhau va cac dinh cua B khong noi duoc voi nhau
+bool biGraph2(vector<vector<int>> adjList)
+{
+	int v;
+	queue <int> q;
+	vector <int> color(adjList.size(), 0);
+	q.push(0);
+	color[0] = 1;
+	while (!q.empty())
+	{
+		v = q.front();
+		if (color[v] != 0)
+		{
+			for (int i = 0; i < adjList[v].size(); i++)
+			{
+				if (color[adjList[v][i]] == color[v])
+					return false;
+				if (color[adjList[v][i]] == 0)
+				{
+					color[adjList[v][i]] = -color[v];
+					q.push(adjList[v][i]);
+				}
+
+			}
+		}
+		q.pop();
+	}
+	return true;
+}
+bool biGraph1(vector<vector<int>> adjMatrix)
+{
+	int v;
+	queue <int> q;
+	vector <int> color(adjMatrix.size(), 0);
+	q.push(0);
+	color[0] = 1;
+	while (!q.empty())
+	{
+		v = q.front();
+		if (color[v] != 0)
+		{
+			for (int i = 0; i < adjMatrix[v].size(); i++)
+			{
+				if (adjMatrix[v][i] && color[v] == color[i])
+					return false;
+				if (adjMatrix[v][i] && color[i] == 0)
+
+				{
+					color[i] = -color[v];
+					q.push(i);
+				}
+			}
+		}
+		q.pop();
+	}
+	return true;
+}
+
 int main()
 {
 	vector<vector<int>> adjList = toAdjList();
@@ -255,9 +347,6 @@ int main()
 	//cout << numberOfEdge1(adjMatrix);
 	//cout << numberOfEdge2(adjList);
 //	cout << endl << numberOfVertices(adjList);
-	vector<int> leaf = listOfLeaf2(adjList);
-	for (int i = 0; i < leaf.size(); i++)
-		cout << leaf[i];
->>>>>>> 91f5c58 (up lai)
+	cout << isCicularGraph2(adjList);
 	return 0;
 }
