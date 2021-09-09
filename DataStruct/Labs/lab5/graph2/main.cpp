@@ -6,7 +6,7 @@
 #include<queue>
 #include<stack>
 using namespace std;
-
+#define MAX 999999
 vector<vector<int>> toAdjList()
 {
 	ifstream fi("graph1.txt");
@@ -233,7 +233,7 @@ bool isCicularGraph1(vector<vector<int>> adjMatrix)
 		if (count(adjMatrix[vertex].begin(), adjMatrix[vertex].end(), 1) != 2)
 			return false;
 		else {
-			for (int j = 0; j < n; j++)
+			for (int j = 0; j < adjMatrix.size(); j++)
 			{
 				if (adjMatrix[vertex][j] == 1)
 				{
@@ -336,7 +336,45 @@ bool biGraph1(vector<vector<int>> adjMatrix)
 	}
 	return true;
 }
-
+int dijkstra(vector<vector<int>> adjMatrix, int verStart, int verEnd)
+{
+	int n = adjMatrix.size();
+	int* f = new int[n];
+	bool* check = new bool[n];
+	int* trace = new int[n];
+	for (int i = 0; i < n; i++)
+	{
+		f[i] = MAX;
+		check[i] = true;
+		trace[i] = -1;
+	}
+	f[verStart] = 0;
+	trace[verStart] = 0;
+	int ver = verStart, min;
+	while (ver != verEnd)
+	{
+		//tim ver
+		min = MAX;
+		for (int i = 0; i < n; i++)
+			if (check[i] == true && min > f[i])
+			{
+				min = f[i];
+				ver = i;
+			}
+		if (min == MAX)
+			break;
+		//xoa v khoi t2
+		check[ver] = false;
+		//toi uu cac dinh trong t2
+		for (int i = 0; i < n; i++)
+			if (adjMatrix[ver][i] > 0 && f[i] > f[ver] + adjMatrix[ver][i])
+			{
+				f[i] = f[ver] + adjMatrix[ver][i];
+				trace[i] = ver;
+			}
+	}
+	return f[verEnd];
+}
 int main()
 {
 	vector<vector<int>> adjList = toAdjList();
@@ -347,6 +385,17 @@ int main()
 	//cout << numberOfEdge1(adjMatrix);
 	//cout << numberOfEdge2(adjList);
 //	cout << endl << numberOfVertices(adjList);
-	cout << isCicularGraph2(adjList);
+	//cout << isCicularGraph2(adjList);
+	cout << dijkstra(adjMatrix, 4 ,1);
 	return 0;
 }
+//9
+//0 0 1 0 0 1 0 0 0
+//0 0 0 0 0 0 1 0 0
+//1 0 0 0 0 0 1 1 0
+//0 0 0 0 1 1 0 0 0
+//0 0 0 1 0 1 0 0 0
+//1 0 0 1 1 0 0 1 0
+//0 1 1 0 0 0 0 0 0
+//0 0 1 0 0 1 0 0 1
+//0 0 0 0 0 0 0 1 0
