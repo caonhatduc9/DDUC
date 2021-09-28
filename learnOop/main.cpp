@@ -33,5 +33,6 @@ int main()
 	HOCSINH hs;
 	hs.input();
 	hs.output();
+	abs(-2);
 	return 0;
 }
